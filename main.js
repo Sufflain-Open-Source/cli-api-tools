@@ -5,9 +5,20 @@
  */
 
 import config from '../../cli-config.js';
+import { fetchServerPubKey } from '../data/remote.js';
+import { setServerPubKey, setKeyPair } from '../data/session.js';
 import * as pgp from 'openpgp';
 
 const pass = 'c6ljzyboxj8Y2cdiPs2Rp9mxkDTQrtwa';
+
+// setupEncryption :: -> Undefined
+export async function setupEncryption() {
+    const serverPubKey = await fetchServerPubKey();
+    const keyPair = await generateKeyPair(); 
+
+    setServerPubKey(serverPubKey);
+    setKeyPair(keyPair);
+}
 
 // decryptServerResponse :: String -> String
 export async function decryptServerResponse(response, privateKey) {
