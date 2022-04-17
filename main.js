@@ -45,8 +45,6 @@ export async function encryptOwnPubKey(serverPub, ownPub) {
 // generateKeyPair :: -> undefined
 export async function generateKeyPair() {
     const { privateKey, publicKey } = await pgp.generateKey({
-        type: 'rsa',
-        rsaBits: 2048,
         userIDs: [{ name: 'Timofey Chuchkanov', email: 'crt0r.9@yahoo.com' }],
         passphrase: pass
     });
